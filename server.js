@@ -7,6 +7,7 @@ const cors = require("cors");
 // route imports
 const userRoutes = require('./routes/user')
 const destinationRoutes = require('./routes/destinationRoutes');
+const userReservation = require('./routes/reservation')
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use((req, res, next) => {
 })
 
 // routes
+app.use('/reservations', userReservation)
 app.use('/user', userRoutes)
 app.use('/api/destinations', destinationRoutes);
 
