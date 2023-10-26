@@ -19,17 +19,13 @@ const reservationSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  dateVoyage: {
-    type: Date,
-    required: true
-  },
   dateDebutVoyage: {
     type: Date,
     required: true
   },
   dateFinVoyage: {
     type: Date,
-    required: true
+    required: false
   },
   annuleParAdmin: {
     type: Boolean,
