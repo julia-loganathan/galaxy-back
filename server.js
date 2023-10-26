@@ -6,6 +6,7 @@ const cors = require("cors");
 
 // route imports
 const userRoutes = require('./routes/user')
+const userReservation = require('./routes/reservation')
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use((req, res, next) => {
 })
 
 // routes
+app.use('/reservations', userReservation)
 app.use('/user', userRoutes)
 
 // connect to db
