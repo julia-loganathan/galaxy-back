@@ -22,10 +22,14 @@ const userSchema = new Schema({
 // signup method
 userSchema.statics.signup = async function(nom, email, password) {  
 
+    if (!nom ||!email || !password) {
+        throw error('Tous les champs doivent être valide')
+    }
+
     // check if email exists
     const exists = await this.findOne({ email }); 
     if (exists) {
-        throw Error('Email already in use');
+        throw Error('Email déja utilisé');
     }
 
     const salt = await bcrypt.genSalt(10);
