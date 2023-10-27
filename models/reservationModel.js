@@ -7,7 +7,7 @@ const reservationSchema = new mongoose.Schema({
     required: true
   },
   voyage: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Number,
     ref: 'Voyage',
     required: true
   },
@@ -22,10 +22,6 @@ const reservationSchema = new mongoose.Schema({
   dateDebutVoyage: {
     type: Date,
     required: true
-  },
-  dateFinVoyage: {
-    type: Date,
-    required: false
   },
   annuleParAdmin: {
     type: Boolean,
