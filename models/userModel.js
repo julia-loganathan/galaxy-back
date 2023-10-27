@@ -22,10 +22,14 @@ const userSchema = new Schema({
 // signup method
 userSchema.statics.signup = async function(nom, email, password) {  
 
+    if (!nom ||!email || !password) {
+        throw Error('Tous les champs doivent être valide')
+    }
+
     // check if email exists
     const exists = await this.findOne({ email }); 
     if (exists) {
-        throw Error('Email already in use');
+        throw Error('Email déja utilisé');
     }
 
     const salt = await bcrypt.genSalt(10);
@@ -35,5 +39,31 @@ userSchema.statics.signup = async function(nom, email, password) {
   
     return user;
 }
+
+//login method
+userSchema.statics.login = async function(email, password) {
+
+    if (!email || !password) {
+        throw Error('Tous les champs doivent être valide')
+    }
+
+    // check if email exists
+    const user = await this.findOne({ email })
+
+    if (!user) {
+        throw Error('utilisateur non trouvé')
+    }
+
+    // compare pw
+
+    const match = await bcrypt.compare(password, user.password)
+
+    if (!match) {
+        throw Error('mauvais mot de passe')
+    }
+
+    return user
+}
+
 
 module.exports = mongoose.model('User', userSchema)
